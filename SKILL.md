@@ -324,11 +324,11 @@ python3 -X utf8 $HOME/Documents/Codex/cinema-dna-21x9x3/scripts/compose_nine_sho
 
 ## 12. 按需读取
 
-当前用户要求与本文件的模式、工具和连续性规则优先。full-spec 只取单帧、三联、焦段、光学与题材方法的章节；镜头职责按第 5 节的镜头账本设计。
+当前用户要求与本文件的模式、工具和连续性规则优先。full-spec 可取的章节：第 5 节常用三联叙事模板、第 6.1.4 节光学缺陷系统、第 9 节八个电影视觉主引擎、第 10 节（含 10.10–10.11）导演与电影 DNA 库、第 12 节镜头选择规则、第 13–17 节构图与场面调度 / 光线 / 色彩 / 人物处理 / 建筑、空间、产品转换规则；镜头职责按本文件第 5 节的镜头账本设计。
 
 - 九镜故事任务：必须读取 [references/nine-shot-story-protocol-v3.md](references/nine-shot-story-protocol-v3.md)。
 - 输出仍显得油腻、过度精致、过脏或镜头节奏常规时：读取 [references/cinema-dna-v4-anti-ai.md](references/cinema-dna-v4-anti-ai.md)。
-- 需要更完整的单帧、三联、焦段、光学和题材方法库时：按相关章节读取 [references/cinema-dna-full-spec.md](references/cinema-dna-full-spec.md)，不要整份加载。
+- 需要更完整的单帧、三联、焦段、光学和题材方法库时：按上面列出的章节标题定位读取 [references/cinema-dna-full-spec.md](references/cinema-dna-full-spec.md)，不整份加载。
 
 ## 13. 最终原则
 

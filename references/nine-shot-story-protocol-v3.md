@@ -157,7 +157,7 @@
     [era and practical location]
     Continuity: [character anchors], [supporting character anchors], [key prop], [fixed environment].
     [capture substrate], [physical color sources], [light-source rule].
-    no CGI spectacle, no glossy advertising, no HDR, no plastic skin, no television-drama polish.
+    real actors, restrained production design, soft highlight roll-off, subtle uneven grain, natural skin texture with visible pores.
 
 ### 单镜差异
 
