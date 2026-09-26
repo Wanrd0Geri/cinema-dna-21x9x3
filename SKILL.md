@@ -18,8 +18,6 @@ description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、
 - 镜头之间不可随意打乱的剪辑关系。
 - 真实演员、实景或实体搭景、可信材质和光学限制。
 
-拒绝 CG 概念图、游戏 key art、AI 壁纸、广告灯光、偶像剧调度、青橙滤镜和无来源特效。
-
 ## 1. 先选择输出模式
 
 用户明确指定数量时，以用户要求为准。
@@ -157,15 +155,15 @@ description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、
 6. 可解释的主光源。
 7. 综合色与强调色的物理来源。
 8. 成像介质与有限光学缺陷。
-9. 精简负面约束。
+9. 只在无法正写时补一句结构性排除（拼贴、网格、字幕、水印）。
 
 推荐基底，按需取用，不要全部堆叠：
 
-> standalone live-action feature-film still, practical location, real actors, physically plausible set and props, restrained production design, soft highlight roll-off, medium-low microcontrast, subtle uneven grain, local optical softness, natural skin texture
+> standalone live-action feature-film still, practical location, real actors, physically plausible set and props, restrained production design, soft highlight roll-off, medium-low microcontrast, subtle uneven grain, local optical softness, natural skin texture with visible pores and uneven tone, colors sourced from wardrobe, set dressing and practical lights, edge light only where a visible source explains it, blocking as observed in a real location
 
-推荐负面约束：
+结构性排除（只这几项，其余都用上面的正向基底表达）：
 
-> no collage, no grid, no captions, no watermark, no CGI concept art, no game key art, no glossy AI rendering, no HDR, no plastic skin, no excessive particles, no teal-orange grading, no artificial rim light, no commercial beauty lighting, no television-drama blocking
+> single standalone frame, no collage, no grid, no captions, no watermark
 
 避免空泛词：“masterpiece”“epic”“beautiful”“dramatic”“volumetric”“highly detailed”“rich detail”。
 
@@ -326,7 +324,7 @@ python3 -X utf8 $HOME/Documents/Codex/cinema-dna-21x9x3/scripts/compose_nine_sho
 
 ## 12. 按需读取
 
-当前用户要求与本文件的模式、工具和连续性规则优先。扩展方法库保留了历史模板，按题材取用；不要用其中旧的固定三镜职责覆盖当前镜头设计。
+当前用户要求与本文件的模式、工具和连续性规则优先。full-spec 只取单帧、三联、焦段、光学与题材方法的章节；镜头职责按第 5 节的镜头账本设计。
 
 - 九镜故事任务：必须读取 [references/nine-shot-story-protocol-v3.md](references/nine-shot-story-protocol-v3.md)。
 - 输出仍显得油腻、过度精致、过脏或镜头节奏常规时：读取 [references/cinema-dna-v4-anti-ai.md](references/cinema-dna-v4-anti-ai.md)。
