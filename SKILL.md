@@ -1,6 +1,6 @@
 ---
 name: cinema-dna-21x9x3
-description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、三联或九镜，支持按要求生成图片或只交付镜头方案与提示词。用于用户明确要真人实景电影静帧、三联图或九镜图像故事。电影感、21:9、连续镜头等词本身不触发；不接管 CG 动画、视频提示词、源图局部修改或术语解释。片名、海报和视觉体系仅在请求时追加。"
+description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、三联或九镜，支持按要求生成图片或只交付镜头方案与提示词。用于用户明确要真人实景电影静帧、三联图或九镜图像故事，也用于点名某位导演视觉语法的单帧（如“用王家卫的语法拍一张……”“韦斯·安德森风格的电影截帧”），内置 24 位导演的构图、焦段与色彩配方。电影感、21:9、连续镜头等词本身不触发；不接管 CG 动画、视频提示词、源图局部修改或术语解释。片名、海报和视觉体系仅在请求时追加。"
 ---
 
 # CINEMA DNA 3.0｜21:9 × 1 / 3 / 9
@@ -24,7 +24,7 @@ description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、
 
 | 用户意图 | 模式 | 交付 |
 |---|---|---|
-| 一张、单帧、封面底图 | Single Frame | 1 张独立 2.39:1 |
+| 一张、单帧、封面底图、点名导演语法的一张 | Single Frame | 1 张独立 2.39:1，走第 7.1 节导演单帧引擎 |
 | 三联、三个镜头、默认电影测试 | Triptych | 3 张独立 2.39:1，再纵向拼接 |
 | 9 张讲故事、九镜、九宫格、完整场景 | Nine-Shot Story | 9 张独立 2.39:1，再拼 3×3 九宫格 |
 
@@ -145,6 +145,8 @@ description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、
 
 ## 6. 提示词编译
 
+本节的顺序与基底管三联和九镜（九镜模板见九镜协议第 6 节）。单帧的成品形态是第 7.1 节的五段式，内容清单与本节一致，只是打包方式和否定词策略不同。
+
 最终图像提示词默认用英文，并按以下顺序：
 
 1. 独立单帧与画幅：“standalone live-action film still, 2.39:1 horizontal, no collage, no grid”。
@@ -169,9 +171,52 @@ description: "为真人实景电影静帧或图像故事板设计 21:9 单帧、
 
 ## 7. 生成编排
 
-### 7.1 单帧
+### 7.1 单帧｜导演单帧引擎
 
-生成 1 张，核对主要动作、机位理由、光源和画幅。
+单帧没有镜头间的剪辑关系可依靠，电影感只能来自这一帧内部的形式决定。所以单帧不走“生成 1 张、核对画幅”的简化路径，而是把一位导演的语法翻译成七轴可见特征（构图调度、机位焦段、光源结构、色彩与成像质感、美术材质、时间行为、情绪距离），再用一种主构图几何、一支焦段、一份色彩配方和一个材质世界把它钉进像素。导演名只是内部配方，不进最终提示词。
+
+执行单帧任务前读取 [references/director-frame/single-frame-engine.md](references/director-frame/single-frame-engine.md)，按其 Workflow 走。那是完整操作规程；本节只列路由、映射和与本 skill 其余部分的接口。
+
+路由：
+
+- 用户点名导演：读 [director-grammars.md](references/director-frame/director-grammars.md)、[director-color-signatures.md](references/director-frame/director-color-signatures.md)、[lens-optics-and-focus.md](references/director-frame/lens-optics-and-focus.md)，取该导演条目的强签名锁、色彩配方和焦段梯子。导演不在库中时，按同样七轴自行推断并说明。
+- 用户只给题材，或用的是 full-spec 第 10 节的 DNA 族名：先按下表落到具名导演条目，再同上。选了哪位要在镜头卡里写明。
+- 任何单帧：读 [composition-geometry.md](references/director-frame/composition-geometry.md) 选一种主几何，读 [production-design-and-texture.md](references/director-frame/production-design-and-texture.md) 锁六层材质。
+- 用户要“强烈”“一眼认出”或强度 90 以上：加读 [style-amplification.md](references/director-frame/style-amplification.md)。只放大一个杠杆。
+- 需要比较多位导演的视觉语言时：读 [reference-gallery.md](references/director-frame/reference-gallery.md)（只保留了文字基准，图片未随库）。
+
+full-spec DNA 族与导演条目的映射：
+
+| full-spec 第 10 节 | 导演条目 |
+|---|---|
+| 10.1 精密荒诞 | Wes Anderson |
+| 10.2 现实史诗 | Christopher Nolan |
+| 10.3 沉默巨构 | Denis Villeneuve |
+| 10.4 东方武侠 | 库中无胡金铨；按题材取 Zhang Yimou 的群体几何或 Hou Hsiao-hsien 的远观层次，并说明 |
+| 10.5 密色情绪 | Wong Kar-wai |
+| 10.6 几何未知 | Stanley Kubrick |
+| 10.7 时间废墟 | Andrei Tarkovsky |
+| 10.8 远观东方 | Hou Hsiao-hsien 或 Akira Kurosawa |
+| 10.9 冷灰未来 | Edward Yang（都市制度）或 David Fincher（监控式精密） |
+
+与本 skill 其余规则的接口：
+
+- 画幅 2.39:1。成品不是 2.39 时运行 `python3 -X utf8 scripts/crop_to_scope.py INPUT OUTPUT --anchor-x 0.5 --anchor-y 0.5`，用锚点保护偏心主体，不拉伸。脚本只依赖 ffmpeg，成功后打印 JSON 摘要；Windows 上没有 `python3` 时换成 `py -3`。
+- 图像后端按第 2 节。引擎文件里的 “built-in image generation” 一律理解为用户指定的后端。
+- 第 3 节五个判断同样适用：叙事瞬间必须是正在发生、尚未解决的动作，不是情绪摆拍。
+- 第 6 节正向真实基底是地板，第四段在导演语法之上叠加它。导演语法明确要求的风格化（推颗粒、步进拖影、高饱和色块）优先于基底里的“克制”措辞，但皮肤质感、材质重量和可解释光源不让步。
+- 第五段的 avoid-list 原样保留。它是单帧模式实测有效的部分，不套用第 6 节“只留四项结构性排除”；那条规则继续管三联与九镜。
+- 第 9 节原创隔离适用。
+
+成品是五段式：
+
+1. native 2.39:1 frame + narrative instant + original setting
+2. blocking + frame geometry + production-design details
+3. camera position + one exact lens + focus + camera behavior
+4. motivated light + palette + capture texture
+5. emotional temperature + originality and avoid-list
+
+交付用引擎文件 Output Format 的镜头卡（Mode / Strength / Director translation / Director DNA / Composition / Color signature / Recipe / Lens / Art direction / Ratio），加最终五段提示词和一句解读。用户只要图像时交付图像与镜头卡即可。
 
 ### 7.2 三联
 
@@ -322,10 +367,13 @@ python3 -X utf8 $HOME/Documents/Codex/cinema-dna-21x9x3/scripts/compose_nine_sho
 
 用户只要图像时，交付图像和必要文件链接即可，不重复输出所有提示词。
 
+Single 模式改用第 7.1 节的镜头卡格式，不套用上面的多镜模板。
+
 ## 12. 按需读取
 
 当前用户要求与本文件的模式、工具和连续性规则优先。full-spec 可取的章节：第 5 节常用三联叙事模板、第 6.1.4 节光学缺陷系统、第 9 节八个电影视觉主引擎、第 10 节（含 10.10–10.11）导演与电影 DNA 库、第 12 节镜头选择规则、第 13–17 节构图与场面调度 / 光线 / 色彩 / 人物处理 / 建筑、空间、产品转换规则；镜头职责按本文件第 5 节的镜头账本设计。
 
+- 单帧任务：必须读取 [references/director-frame/single-frame-engine.md](references/director-frame/single-frame-engine.md)，并按第 7.1 节路由读取 `references/director-frame/` 下的导演语法、构图几何、色彩配方、焦段与材质文件。这组文件是英文，按 24 位具名导演组织；full-spec 第 10 节的 DNA 族是它们的中文抽象版，按第 7.1 节映射表对应，不要并行引用两套说法。
 - 九镜故事任务：必须读取 [references/nine-shot-story-protocol-v3.md](references/nine-shot-story-protocol-v3.md)。
 - 输出仍显得油腻、过度精致、过脏或镜头节奏常规时：读取 [references/cinema-dna-v4-anti-ai.md](references/cinema-dna-v4-anti-ai.md)。
 - 需要更完整的单帧、三联、焦段、光学和题材方法库时：按上面列出的章节标题定位读取 [references/cinema-dna-full-spec.md](references/cinema-dna-full-spec.md)，不整份加载。
